@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">ProjectPatient</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="update">Update</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="new_user">New User</string>
+    <string name="enter_password">Enter password</string>
+    <string name="enter_username">Enter username</string>
+    <string name="doctor">Doctor</string>
+    <string name="user">User</string>
+    <string name="login">Login</string>
+    <string name="registration">Registration</string>
+    <string name="forgot">Forgot Password</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_phone_number">Enter phone number</string>
+    <string name="enter_email">Enter email</string>
+    <string name="register">Register</string>
+    <string name="sign_in">Sign In</string>
+    <string name="enter_age">Enter age</string>
+    <string name="enter_degree">Enter degree</string>
+    <string name="morning_opd">Morning OPD</string>
+    <string name="evening_opd">Evening OPD</string>
+    <string-array name="gender">
+
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+
+    </string-array>
+    <string name="title_activity_main">Dashboard</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="select_vitals">Select vitals</string>
+    <string name="blood_pressure">Blood Pressure</string>
+    <string name="cholestrol">Cholestrol</string>
+    <string name="stress">Stress</string>
+    <string name="ecg">ECG</string>
+    <string name="hemogram">Hemogram</string>
+    <string name="read">Read</string>
+    <string name="sugar_random">Sugar Random</string>
+    <string name="bmi">BMI</string>
+</resources>
