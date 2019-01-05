@@ -44,4 +44,7 @@
     <string name="read">Read</string>
     <string name="sugar_random">Sugar Random</string>
     <string name="bmi">BMI</string>
+    <string name="patients">Patients</string>
+    <string name="report">Report</string>
+    <string name="search_here">Search here</string>
 </resources>

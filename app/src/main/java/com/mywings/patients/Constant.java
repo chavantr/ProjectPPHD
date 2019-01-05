@@ -2,15 +2,20 @@ package com.mywings.patients;
 
 public class Constant {
 
-    private static final String URL = "http://192.168.2.16:8978/MyRestService.svc/";
+    public static final String URL = "http://192.168.2.19:8978/MyRestService.svc/";
 
-    private static final String LOGIN = "Login";
+    public static final String LOGIN_DOCTOR = "LoginDoctor";
 
-    private static final String REGISTER_USER = "";
+    public static final String LOGIN_USER = "LoginUser";
 
-    private static final String REGISTER_DOCTOR = "";
+    public static final String REGISTER_USER = "RegisterUser";
 
-    private static final String GET_RECORDS = "";
+    public static final String REGISTER_DOCTOR = "RegisterDoctor";
 
+    public static final String GET_RECORDS = "GetSensorData";
+
+    public static final String GET_PATIENTS = "Users";
+
+    public static final String UPDATE_USER = "SetUser";
 
 }

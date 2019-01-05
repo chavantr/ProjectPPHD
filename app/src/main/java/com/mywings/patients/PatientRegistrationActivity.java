@@ -1,14 +1,18 @@
 package com.mywings.patients;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class PatientRegistrationActivity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class PatientRegistrationActivity extends AppCompatActivity implements OnRegistrationListener {
 
 
     private EditText txtName;
@@ -23,6 +27,7 @@ public class PatientRegistrationActivity extends AppCompatActivity {
     private EditText txtWeight;
     private EditText txtAge;
     private Button btnRegister;
+    private ProgressDialogUtil progressDialogUtil;
 
 
     @Override
@@ -43,12 +48,33 @@ public class PatientRegistrationActivity extends AppCompatActivity {
         spnGender = findViewById(R.id.spnGender);
         btnRegister = findViewById(R.id.btnRegister);
 
+        progressDialogUtil = new ProgressDialogUtil(this);
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (validate()) {
-
+                    JSONObject jRequest = new JSONObject();
+                    JSONObject params = new JSONObject();
+                    try {
+                        params.put("Full_Name", txtName.getText().toString());
+                        params.put("Mobile", txtPhone.getText().toString());
+                        params.put("Email_Id", txtEmail.getText().toString());
+                        params.put("Username", txtUserName.getText().toString());
+                        params.put("Password", txtPassword.getText().toString());
+                        params.put("Gender", spnGender.getSelectedItem().toString());
+                        params.put("Address", txtLocalAddress.getText().toString());
+                        params.put("DOB", txtDob.getText().toString());
+                        params.put("Height", txtHeight.getText().toString());
+                        params.put("Weight", txtWeight.getText().toString());
+                        params.put("Age", txtAge.getText().toString());
+                        jRequest.put("register", params);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    progressDialogUtil.show();
+                    PatientsRegistrationAsync patientsRegistrationAsync = new PatientsRegistrationAsync();
+                    patientsRegistrationAsync.setOnRegistrationListener(PatientRegistrationActivity.this, jRequest);
                 } else {
                     Toast.makeText(PatientRegistrationActivity.this, "All fields required.", Toast.LENGTH_LONG).show();
                 }
@@ -74,4 +100,18 @@ public class PatientRegistrationActivity extends AppCompatActivity {
         return true;
     }
 
+
+    @Override
+    public void onSuccess(JSONObject success) {
+        progressDialogUtil.hide();
+        if (null != success && success.toString().contains("1")) {
+            Snackbar.make(btnRegister, "Registration completed.", Snackbar.LENGTH_INDEFINITE).setAction("Ok", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            }).show();
+
+        }
+    }
 }
