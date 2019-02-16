@@ -3,6 +3,9 @@
     package="com.mywings.patients">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UpdateDoctorActivity"></activity>
+        <activity
+            android:name=".UpdateProfileUserActivity"
+            android:label="@string/profile" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/login"
@@ -23,11 +30,11 @@
         </activity>
         <activity
             android:name=".PatientRegistrationActivity"
-            android:label="@string/registration"
+            android:label="Patient Registration"
             android:screenOrientation="portrait" />
         <activity
             android:name=".DoctorRegistrationActivity"
-            android:label="@string/registration"
+            android:label="Doctor Registration"
             android:screenOrientation="portrait" />
         <activity
             android:name=".FortgotActivity"
@@ -46,11 +53,18 @@
             android:name=".PatientActivity"
             android:label="@string/patients"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".PatientInfoActivity"
+            android:label="@string/info"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".prescription.AddPrescriptionActivity"
+            android:label="@string/pres"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QuestionariesActivity"
+            android:label="@string/questionaries"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

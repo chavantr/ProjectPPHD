@@ -7,5 +7,11 @@
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="Profile" />
+
+
+        <item
+            android:id="@+id/nav_questions"
+            android:icon="@drawable/ic_question_answer_black_24dp"
+            android:title="Questionaries" />
     </group>
 </menu>

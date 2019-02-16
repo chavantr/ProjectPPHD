@@ -1,5 +1,6 @@
 package com.mywings.patients;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -30,14 +31,17 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PatientViewHolder patientViewHolder, int i) {
+    public void onBindViewHolder(@NonNull PatientViewHolder patientViewHolder, final int i) {
 
         patientViewHolder.lblName.setText(lstUser.get(i).getName());
 
         patientViewHolder.cvContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                UserDataHolder.getInstance().setSelectedUser(lstUser.get(i));
+                Intent intent = new Intent(view.getContext(), PatientInfoActivity.class);
+                intent.putExtra("id", lstUser.get(i).getId());
+                view.getContext().startActivity(intent);
             }
         });
 

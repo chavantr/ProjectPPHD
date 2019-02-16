@@ -48,8 +48,8 @@ public class LoginActivity extends AppCompatActivity implements OnLoginListener,
             public void onClick(View view) {
 
                 if (rdbUser.isChecked()) {
-                    txtUserName.setText("abc");
-                    txtPassword.setText("123456");
+                    txtUserName.setText("suvarna");
+                    txtPassword.setText("suv");
 
                 } else if (rdbDoctor.isChecked()) {
                     txtUserName.setText("om1");
@@ -83,18 +83,25 @@ public class LoginActivity extends AppCompatActivity implements OnLoginListener,
 
 
                 if (rdbUser.isChecked()) {
-                    // txtUserName.setText("abc");
-                    // txtPassword.setText("123456");
+
                     Intent intent = new Intent(LoginActivity.this, PatientRegistrationActivity.class);
                     startActivity(intent);
                 } else if (rdbDoctor.isChecked()) {
-                    // txtUserName.setText("om1");
-                    // txtPassword.setText("123");
+
                     Intent intent = new Intent(LoginActivity.this, DoctorRegistrationActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(LoginActivity.this, "Select user type", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+
+        findViewById(R.id.btnQuestionaries).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, QuestionariesActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -111,48 +118,32 @@ public class LoginActivity extends AppCompatActivity implements OnLoginListener,
     }
 
     private void initLoginUser() throws JSONException {
-
         LoginAsync loginAsync = new LoginAsync();
-
         JSONObject jLogin = new JSONObject();
-
         JSONObject params = new JSONObject();
-
         params.put("UserName", txtUserName.getText().toString());
         params.put("Password", txtPassword.getText().toString());
-
         jLogin.put("login", params);
-
         loginAsync.setLoginListener(this, jLogin);
-
     }
 
     private void initLoginDoctor() throws JSONException {
-
         DoctorLoginAsync loginAsync = new DoctorLoginAsync();
-
         JSONObject jLogin = new JSONObject();
-
         JSONObject params = new JSONObject();
-
         params.put("UserName", txtUserName.getText().toString());
         params.put("Password", txtPassword.getText().toString());
-
         jLogin.put("login", params);
-
         loginAsync.setOnDoctorLoginListener(this, jLogin);
-
     }
 
     @Override
     public void onLoginListener(JSONObject result) {
         progressDialogUtil.hide();
         if (null != result && result.length() > 0) {
-
             try {
                 result = result.getJSONObject("LoginUserResult");
                 User user = new User();
-
                 user.setId(result.getInt("Id"));
                 user.setName(result.getString("Name"));
                 user.setMobile(result.getString("Mobile"));
@@ -165,18 +156,15 @@ public class LoginActivity extends AppCompatActivity implements OnLoginListener,
                 user.setHeight(result.getString("Height"));
                 user.setWeight(result.getString("Weight"));
                 user.setAge(result.getString("Age"));
-
                 UserDataHolder.getInstance().setUser(user);
-
+                UserDataHolder.getInstance().setAdmin(false);
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
+        } else {
+            Toast.makeText(this, "Enter valid username and password", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -204,6 +192,7 @@ public class LoginActivity extends AppCompatActivity implements OnLoginListener,
                 doctor.setUserName(result.getString("UserName"));
                 doctor.setPassword(result.getString("Password"));
                 UserDataHolder.getInstance().setDoctor(doctor);
+                UserDataHolder.getInstance().setAdmin(true);
 
                 Intent intent = new Intent(LoginActivity.this, PatientActivity.class);
                 startActivity(intent);

@@ -9,8 +9,8 @@ public class ProgressDialogUtil {
     public ProgressDialogUtil(Context context) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Please wait");
-        progressDialog.setCancelable(true);
-        progressDialog.setCanceledOnTouchOutside(true);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
     }
 
     private ProgressDialog progressDialog;

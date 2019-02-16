@@ -14,7 +14,7 @@ public class GetSensorData extends AsyncTask<Void, Void, JSONArray> {
 
     @Override
     protected JSONArray doInBackground(Void... voids) {
-        String response = httpConnectionUtil.requestGet(Constant.GET_RECORDS);
+        String response = httpConnectionUtil.requestGet(Constant.URL+Constant.GET_RECORDS);
         try {
             JSONArray jsonArray = new JSONArray(response);
             return jsonArray;
@@ -22,6 +22,12 @@ public class GetSensorData extends AsyncTask<Void, Void, JSONArray> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(JSONArray jsonArray) {
+        super.onPostExecute(jsonArray);
+        onSensorDataListener.onSensorDataSuccess(jsonArray);
     }
 
     public void setOnSensorDataListener(OnSensorDataListener onSensorDataListener) {

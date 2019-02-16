@@ -45,6 +45,53 @@
     <string name="sugar_random">Sugar Random</string>
     <string name="bmi">BMI</string>
     <string name="patients">Patients</string>
-    <string name="report">Report</string>
+    <string name="report">Final Report</string>
     <string name="search_here">Search here</string>
+    <string name="lhemogram">Hemogram</string>
+    <string name="lbmi">BMI</string>
+    <string name="lecg">ECG</string>
+    <string name="lstress">Stress</string>
+    <string name="lcholestrol">Cholestrol</string>
+    <string name="random_sugar">Random Sugar</string>
+    <string name="pressure">Pressure</string>
+    <string name="select">Select</string>
+    <string name="prescription">Prescription</string>
+    <string name="morning">Morning</string>
+    <string name="noon">Noon</string>
+    <string name="evening">Evening</string>
+    <string name="save">Save</string>
+    <string name="pres">Add Prescription</string>
+    <string name="info">Information</string>
+    <string name="get_pdf">Get PDF</string>
+    <string name="add_prescription">Add Prescription</string>
+
+    <string name="first">I feel irritated or angry if the car or traffic in front seems to be going too slowly
+/ I become very frustrated at having to wait in a queue
+</string>
+
+    <string name="second">I experience mood swings, difficulty making decisions, concentration and memory is impaired</string>
+
+    <string name="third">Increase in muscular aches and pains especially in the neck, head, lower back, shoulders</string>
+
+    <string name="fourth">My appetite has changed, have either a desire to binge or have a loss of appetite / may skip meals</string>
+
+    <string name="fifth">My self confidence / self esteem is lower than I would like it to be</string>
+
+    <string name="sixth">I feel demotivated when I start any new work/ not feeling good to start with/ Don’t want to do any new work</string>
+
+    <string name="seventh">I am not feeling happy in any circumstances</string>
+
+    <string name="eighth">Always feeling sleepy/ Cant sleep / sleeping disorder</string>
+
+    <string name="nineth">Cant make quick decisions</string>
+
+    <string name="tenth">Randomness in BP / pulse palpitations</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="questionaries">Questionaries</string>
+    <string name="vah">VAH</string>
+    <string name="ci">CI</string>
+    <string name="cvd">CVD</string>
+    <string name="profile">Profile</string>
+
 </resources>

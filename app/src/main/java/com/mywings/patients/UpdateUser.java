@@ -20,7 +20,8 @@ public class UpdateUser extends AsyncTask<String, Void, String> {
     }
 
 
-    public void setUpdateUserListener(OnUpdateUserListener updateUserListener) {
+    public void setUpdateUserListener(OnUpdateUserListener updateUserListener, String id) {
         this.updateUserListener = updateUserListener;
+        super.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, id);
     }
 }
