@@ -2,8 +2,8 @@ package com.mywings.patients;
 
 public class Constant {
 
-    public static final String URL = "http://192.168.2.7:8978/MyRestService.svc/";
-    //public static final String URL = "http://mobile.punetraining.com/MyRestService.svc/";
+    //public static final String URL = "http://192.168.2.7:8978/MyRestService.svc/";
+    public static final String URL = "http://mobile.punetraining.com/MyRestService.svc/";
 
     public static final String LOGIN_DOCTOR = "LoginDoctor";
 
@@ -12,6 +12,8 @@ public class Constant {
     public static final String REGISTER_USER = "RegisterUser";
 
     public static final String REGISTER_DOCTOR = "RegisterDoctor";
+
+    public static final String UPDATE_PATIENT = "UpdatePatient";
 
     public static final String GET_RECORDS = "GetSensorData";
 

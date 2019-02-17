@@ -2,16 +2,19 @@ package com.mywings.patients;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.mywings.patients.user.UpdateUserAsync;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class UpdateProfileUserActivity extends AppCompatActivity {
+public class UpdateProfileUserActivity extends AppCompatActivity implements OnUpdateUserListener {
 
 
     private EditText txtName;
@@ -28,6 +31,8 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
     private Button btnRegister;
     private ProgressDialogUtil progressDialogUtil;
 
+    private User user = UserDataHolder.getInstance().getUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +47,29 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
         txtDob = findViewById(R.id.txtDob);
         txtHeight = findViewById(R.id.txtHeight);
         txtWeight = findViewById(R.id.txtWeight);
-        txtAge = findViewById(R.id.txtWeight);
+        txtAge = findViewById(R.id.txtAge);
         spnGender = findViewById(R.id.spnGender);
         btnRegister = findViewById(R.id.btnRegister);
+
+        txtName.setText(user.getName());
+
+        txtPhone.setText(user.getMobile());
+
+        txtEmail.setText(user.getEmailId());
+
+        txtUserName.setText(user.getUserName());
+
+        txtPassword.setText(user.getPassword());
+
+        txtLocalAddress.setText(user.getAddress());
+
+        txtDob.setText(user.getDOB());
+
+        txtHeight.setText(user.getHeight());
+
+        txtWeight.setText(user.getWeight());
+
+        txtAge.setText(user.getAge());
 
         progressDialogUtil = new ProgressDialogUtil(this);
 
@@ -71,8 +96,8 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     progressDialogUtil.show();
-                    //PatientsRegistrationAsync patientsRegistrationAsync = new PatientsRegistrationAsync();
-                    //patientsRegistrationAsync.setOnRegistrationListener(UpdateProfileUserActivity.this, jRequest);
+                    UpdateUserAsync updateUserAsync = new UpdateUserAsync();
+                    updateUserAsync.setOnUpdateUserListener(UpdateProfileUserActivity.this, jRequest);
                 } else {
                     Toast.makeText(UpdateProfileUserActivity.this, "All fields required.", Toast.LENGTH_LONG).show();
                 }
@@ -95,5 +120,16 @@ public class UpdateProfileUserActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void onUpdateUser(String result) {
+        progressDialogUtil.hide();
+        if (!TextUtils.isEmpty(result)) {
+            Toast.makeText(UpdateProfileUserActivity.this, "Profile updated", Toast.LENGTH_LONG).show();
+            finish();
+        } else {
+            Toast.makeText(UpdateProfileUserActivity.this, "An error has occurred.", Toast.LENGTH_LONG).show();
+        }
     }
 }
