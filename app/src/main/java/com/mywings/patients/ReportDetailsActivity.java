@@ -1,6 +1,7 @@
 package com.mywings.patients;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -92,6 +93,41 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
     private TextView lblCVD;
 
     private String[] result;
+
+    private String strSystolic = "";
+    private String strDiastolic = "";
+    private String strHeartRate = "";
+    private String strColestorol = "";
+    private String strColestorolLDL = "";
+    private String strColestorolHDL = "";
+    private String strColestorolRationLDLHDL = "";
+    private String strRandomSugar = "";
+    private String strOTInterval = "";
+    private String strRRInterval = "";
+    private String strSaturation = "";
+    private String strHemoglobin = "";
+    private String strCVD = "";
+    private String strStree = "";
+    private String strCardicIndex = "";
+    private String strVascularAge = "";
+
+
+    private boolean blnSystolic = false;
+    private boolean blnDiastolic = false;
+    private boolean blnHeartRate = false;
+    private boolean blnColestorol = false;
+    private boolean blnColestorolLDL = false;
+    private boolean blnColestorolHDL = false;
+    private boolean blnColestorolRationLDLHDL = false;
+    private boolean blnRandomSugar = false;
+    private boolean blnOTInterval = false;
+    private boolean blnRRInterval = false;
+    private boolean blnSaturation = false;
+    private boolean blnHemoglobin = false;
+    private boolean blnCVD = false;
+    private boolean blnStress = false;
+    private boolean blnCardicIndex = false;
+    private boolean blnVascularAge = false;
 
 
     @Override
@@ -530,6 +566,12 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
                 tableNew.addCell(sysrange);
 
 
+                if (Integer.parseInt(result[0].split("#")[0]) > 120) {
+                    blnSystolic = true;
+                    strSystolic = result[0].split("#")[0] + "(Severe)";
+                }
+
+
                 PdfPCell diatolic = new PdfPCell(new Phrase("Diastolic"));
                 tableNew.addCell(diatolic);
 
@@ -541,6 +583,11 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
 
                 PdfPCell diarange = new PdfPCell(new Phrase("80"));
                 tableNew.addCell(diarange);
+
+                if (Integer.parseInt(result[0].split("#")[0]) < 80) {
+                    blnDiastolic = true;
+                    strDiastolic = result[0].split("#")[0] + "(" + result[0].split("#")[1] + ")";
+                }
 
 
 //------------------
@@ -565,6 +612,11 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
 
                 PdfPCell heartRange = new PdfPCell(new Phrase("60 to 100"));
                 tableNew.addCell(heartRange);
+
+                if (Integer.parseInt(result[2].split("#")[0]) < 60 || Integer.parseInt(result[2].split("#")[0]) > 100) {
+                    blnHeartRate = true;
+                    strHeartRate = result[2].split("#")[0] + "(" + result[2].split("#")[1] + ")";
+                }
 
             }
 
@@ -591,6 +643,11 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
                 PdfPCell colrefvalue = new PdfPCell(new Phrase("< 200"));
                 tableNew.addCell(colrefvalue);
 
+                if (Integer.parseInt(result[3].split("#")[0]) > 200) {
+                    blnColestorol = true;
+                    strColestorol = result[3].split("#")[0] + "(" + result[3].split("#")[1] + ")";
+                }
+
 
                 PdfPCell totcolldl = new PdfPCell(new Phrase("Cholesterol_LDL"));
                 tableNew.addCell(totcolldl);
@@ -606,6 +663,11 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
                 PdfPCell colrefvalueldl = new PdfPCell(new Phrase("100 to 129"));
                 tableNew.addCell(colrefvalueldl);
 
+                if (Integer.parseInt(result[4].split("#")[0]) < 100 || Integer.parseInt(result[4].split("#")[1]) > 200) {
+                    blnColestorolLDL = true;
+                    strColestorolLDL = result[4].split("#")[0] + "(" + result[4].split("#")[1] + ")";
+                }
+
 
                 PdfPCell totcolhdl = new PdfPCell(new Phrase("Cholesterol_HDL"));
                 tableNew.addCell(totcolhdl);
@@ -620,6 +682,11 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
 
                 PdfPCell colrefvaluehdl = new PdfPCell(new Phrase("40 to 59"));
                 tableNew.addCell(colrefvaluehdl);
+
+                if (Integer.parseInt(result[5].split("#")[0]) < 40 || Integer.parseInt(result[5].split("#")[0]) > 59) {
+                    blnColestorolHDL = true;
+                    strColestorolHDL = result[5].split("#")[0] + " (" + result[5].split("#")[1] + ")";
+                }
 
                 //---------------------------
 
@@ -674,6 +741,16 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
                 PdfPCell stressrange = new PdfPCell(new Phrase(result[7].split("#")[0]));
                 stressrange.setColspan(2);
                 tableNew.addCell(stressrange);
+
+
+                if (Integer.parseInt(result[7].split("#")[0]) < 0 && Integer.parseInt(result[7].split("#")[0]) > 10) {
+
+                    blnStress = true;
+
+                    strStree = result[7].split("#")[0] + " (" + result[7].split("#")[1] + ")";
+
+                }
+
             }
 
 //----------------
@@ -701,6 +778,13 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
                 ransugrange.setColspan(2);
                 tableNew.addCell(ransugrange);
 
+
+                if (Double.parseDouble(result[8].split("#")[0]) <= 0.0) {
+                    blnRandomSugar = true;
+                    strRandomSugar = result[8].split("#")[0] + " (" + result[8].split("#")[1] + ")";
+                }
+
+
             }
 
             //----------------------------
@@ -717,17 +801,22 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
 
                 PdfPCell qt_interval = new PdfPCell(new Phrase("QT_Interval"));
                 tableNew.addCell(qt_interval);
-
-
-                PdfPCell qt_type = new PdfPCell(new Phrase(result[11].split("#")[0]));
+                PdfPCell qt_type = new PdfPCell(new Phrase(result[11].split("#")[1]));
                 tableNew.addCell(qt_type);
 
 
-                PdfPCell qt_intrange = new PdfPCell(new Phrase(result[11].split("#")[1]));
+                PdfPCell qt_intrange = new PdfPCell(new Phrase(result[11].split("#")[0]));
                 tableNew.addCell(qt_intrange);
 
                 PdfPCell qt_interrange = new PdfPCell(new Phrase("0.36to0.44"));
                 tableNew.addCell(qt_interrange);
+
+
+                if (Double.parseDouble(result[8].split("#")[0]) < 0.36 && Double.parseDouble(result[8].split("#")[0]) > 0.44) {
+                    blnOTInterval = true;
+
+                    strOTInterval = result[8].split("#")[0] + " (" + result[8].split("#")[1] + ")";
+                }
 
 
                 //----------
@@ -745,6 +834,12 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
 
                 PdfPCell rr_interrange = new PdfPCell(new Phrase("0.12to0.20(sec)"));
                 tableNew.addCell(rr_interrange);
+
+
+                if (Double.parseDouble(result[10].split("#")[0]) < 0.12 && Double.parseDouble(result[10].split("#")[0]) > 0.20) {
+                    blnRRInterval = true;
+                    strRRInterval = result[10].split("#")[0] + " (" + result[10].split("#")[1] + ")";
+                }
 
 
             }
@@ -775,6 +870,12 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
             tableNew.addCell(oxy_san_range);
 
 
+            if (Integer.parseInt(result[8].split("#")[0]) < 90 && Integer.parseInt(result[8].split("#")[0]) > 100) {
+                blnSaturation = true;
+                strSaturation = result[8].split("#")[0] + " (" + result[8].split("#")[1] + ")";
+            }
+
+
             //-----------------------
 
 
@@ -803,6 +904,12 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
 
                 PdfPCell hemorange = new PdfPCell(new Phrase("12 to 14"));
                 tableNew.addCell(hemorange);
+
+
+                if (Integer.parseInt(result[9].split("#")[0]) < 12 && Integer.parseInt(result[9].split("#")[0]) > 14) {
+                    blnHemoglobin = true;
+                    strHemoglobin = result[9].split("#")[0] + " (" + result[9].split("#")[1] + ")";
+                }
 
 
             }
@@ -900,6 +1007,11 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
             document.add(tableNew);
 
 
+            if (!generate().isEmpty()) {
+                show();
+            }
+
+
             handlePdfResponse.sendEmptyMessage(1);
 
 
@@ -943,5 +1055,87 @@ public class ReportDetailsActivity extends AppCompatActivity implements OnSensor
             lblCI.setText(strNodes[12]);
             lblCVD.setText(strNodes[14]);
         }
+    }
+
+    private String generate() {
+
+        String strNew = "";
+
+        if (blnSystolic) {
+            strNew = strNew + strSystolic + "\n";
+        }
+
+        if (blnDiastolic) {
+            strNew = strNew + strDiastolic + "\n";
+        }
+
+        if (blnHeartRate) {
+            strNew = strNew + strHeartRate + "\n";
+        }
+
+
+        if (blnColestorol) {
+            strNew = strNew + strColestorol + "\n";
+        }
+
+        if (blnColestorolLDL) {
+            strNew = strNew + strColestorolLDL + "\n";
+        }
+
+
+        if (blnColestorolHDL) {
+            strNew = strNew + strColestorolHDL + "\n";
+        }
+
+        if (blnColestorolRationLDLHDL) {
+            strNew = strNew + strColestorolRationLDLHDL;
+        }
+
+        if (blnRandomSugar) {
+            strNew = strNew + strRandomSugar + "\n";
+        }
+
+        if (blnOTInterval) {
+            strNew = strNew + strOTInterval + "\n";
+        }
+
+
+        if (blnRRInterval) {
+            strNew = strNew + strRRInterval + "\n";
+        }
+
+        if (blnSaturation) {
+            strNew = strNew + strSaturation + "\n";
+        }
+
+        if (blnHemoglobin) {
+            strNew = strNew + strHemoglobin + "\n";
+        }
+
+        if (blnCVD) {
+            strNew = strNew + strCVD + "\n";
+        }
+
+        if (blnStress) {
+            strNew = strNew + strStree + "\n";
+        }
+
+
+        if (blnCardicIndex) {
+            strNew = strNew + strCardicIndex + "\n";
+        }
+
+        if (blnVascularAge) {
+            strNew = strNew + strVascularAge;
+        }
+
+        return strNew;
+    }
+
+    private void show() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Info");
+        builder.setMessage(generate());
+        builder.show();
     }
 }

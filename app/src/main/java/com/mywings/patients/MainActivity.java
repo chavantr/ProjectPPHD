@@ -62,14 +62,12 @@ public class MainActivity extends AppCompatActivity
 
         View view = navigationView.getHeaderView(0);
 
-        TextView lblName = view.findViewById(R.id.lblName);
-
-        lblName.setText(UserDataHolder.getInstance().getUser().getName());
-
-        TextView lblTextView = view.findViewById(R.id.textView);
-
-        lblTextView.setText(UserDataHolder.getInstance().getUser().getEmailId());
-
+        if (!UserDataHolder.getInstance().isAdmin()) {
+            TextView lblName = view.findViewById(R.id.lblName);
+            lblName.setText(UserDataHolder.getInstance().getSelectedUser().getName());
+            TextView lblTextView = view.findViewById(R.id.textView);
+            lblTextView.setText(UserDataHolder.getInstance().getSelectedUser().getEmailId());
+        }
 
         chkHemogram = findViewById(R.id.chkHemogram);
         chkBMI = findViewById(R.id.chkBMI);

@@ -93,5 +93,7 @@
     <string name="ci">CI</string>
     <string name="cvd">CVD</string>
     <string name="profile">Profile</string>
+    <string name="enter_primary_number">Enter primary number</string>
+    <string name="enter_secondary_number">Enter secondary number</string>
 
 </resources>

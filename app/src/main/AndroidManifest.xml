@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpdateDoctorActivity"></activity>
+        <activity android:name=".ContactActivity"></activity>
+        <activity android:name=".UpdateDoctorActivity" />
         <activity
             android:name=".UpdateProfileUserActivity"
             android:label="@string/profile" />
